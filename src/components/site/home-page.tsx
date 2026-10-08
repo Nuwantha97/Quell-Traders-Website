@@ -358,7 +358,7 @@ export function HomePage({
               <Reveal>
                 <SectionHeading eyebrow={pageCopy.aboutEyebrow} title={pageCopy.aboutTitle} />
               </Reveal>
-              <Reveal className="about-summary"><p>{about.summary}</p><div className="founder-note"><FounderMark /><span><b>{site.founder}</b><small>{site.role} · {site.founderQualification}</small></span></div></Reveal>
+              <Reveal className="about-summary"><p>{about.summary}</p><div className="founder-note"><FounderMark /><span><b>{site.founder}</b><small>{site.role} </small></span></div></Reveal>
             </div>
             <div className="vision-mission">
               <Reveal className="statement-card statement-card--vision"><span className="statement-number">{pageCopy.visionMarker}</span><h3>{pageCopy.visionLabel}</h3><p>{about.vision}</p></Reveal>

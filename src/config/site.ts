@@ -17,7 +17,6 @@ export const site = {
   },
   founder: "Chameera Sashika",
   role: "Founder / Technical Lead",
-  founderQualification: "Qualified engineer",
   founded: "2025",
   taglines: {
     primary: "Smarter Printing. Greener Production.",
@@ -36,7 +35,7 @@ export const site = {
 
 export const VIDEO_SOURCE: { type: "local" | "youtube"; url: string } = {
   type: "local",
-  url: "/videos/intro.mp4",
+  url: "intro.mp4",
 };
 
 export const navLinks = [
