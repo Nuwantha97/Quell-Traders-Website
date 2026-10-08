@@ -1,0 +1,45 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "src/app/**/*.ts",
+    "src/app/**/*.tsx",
+    "src/components/site/**/*.tsx",
+    "src/config/**/*.ts",
+    "src/data/**/*.ts",
+    "next.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "preserve",
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "bundler",
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "allowJs": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  }
+}

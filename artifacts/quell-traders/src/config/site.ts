@@ -1,0 +1,96 @@
+export const site = {
+  name: "Quell Traders",
+  descriptor: "Printing & Packaging Solutions / Industrial Spares",
+  title: "Quell Traders | TIJ Printing & Compressor Spares – Kelaniya, Sri Lanka",
+  description:
+    "Modern TIJ Technology for Cleaner, Safer & More Sustainable Production. Printing & Packaging Solutions / Industrial Spares in Kelaniya, Sri Lanka.",
+  location: "Kelaniya, Sri Lanka",
+  phone: "+94 71 232 2513",
+  phoneHref: "tel:+94712322513",
+  whatsappHref: "https://wa.me/94712322513",
+  emails: ["quelltraders9@gmail.com", "sashikachameera162@gmail.com"],
+  address: "No. 24, Manelgama, Wanawasala, Kelaniya, Sri Lanka",
+  postalAddress: {
+    streetAddress: "No. 24, Manelgama, Wanawasala",
+    addressLocality: "Kelaniya",
+    addressCountry: "LK",
+  },
+  founder: "Chameera Sashika",
+  role: "Founder / Technical Lead",
+  founderQualification: "Qualified engineer",
+  founded: "2025",
+  taglines: {
+    primary: "Smarter Printing. Greener Production.",
+    secondary: "Smarter Printing for a Greener Tomorrow",
+    impact: "Small Changes Make a Big Impact",
+    business: "Sustainable Solutions for Your Business",
+  },
+  heroSubtext: "Modern TIJ Technology for Cleaner, Safer & More Sustainable Production.",
+  // Replace the local path with a YouTube URL to use an embed instead.
+  videoPoster: "/images/video-poster.jpg",
+  printerImage: "/images/tij-printer.jpg",
+  logoImage: "/logo.png",
+  mapQuery: "Wanawasala, Kelaniya, Sri Lanka",
+  ogType: "website",
+} as const;
+
+export const VIDEO_SOURCE: { type: "local" | "youtube"; url: string } = {
+  type: "local",
+  url: "/videos/intro.mp4",
+};
+
+export const navLinks = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Solutions", href: "#solutions" },
+  { label: "Specifications", href: "#specifications" },
+  { label: "Industries", href: "#industries" },
+  { label: "Clients", href: "#clients" },
+  { label: "Contact", href: "#contact" },
+];
+
+export const formCopy = {
+  title: "Request a quote",
+  description: "TIJ Printing Solutions · Compressor Spares · Other",
+  quoteButton: "Get a Quote",
+  requestQuote: "Request a Quote",
+  watchVideo: "Watch Intro Video",
+  labels: {
+    name: "Name",
+    company: "Company",
+    email: "Email",
+    phone: "Phone",
+    interest: "I'm interested in",
+    message: "Message",
+  },
+  placeholders: {
+    name: "Your name",
+    company: "Company name",
+    email: "you@company.com",
+    phone: "+94",
+    message: "Tell us about your requirements…",
+  },
+  interests: ["TIJ Printing Solutions", "Compressor Spares", "Other"],
+  submit: "Send quote request",
+  sending: "Sending request…",
+  error: "We couldn’t send your request. Please try again or contact us directly.",
+  requiredNote: "Fields marked * are required.",
+  success: "Your quote request has been sent.",
+  emailSubject: "Quote request",
+  emailNotProvided: "Not provided",
+  emailFieldLabels: {
+    name: "Name",
+    company: "Company",
+    email: "Email",
+    phone: "Phone",
+    interest: "Interest",
+    message: "Message",
+  },
+  emailNotConfigured: "Email delivery is not configured yet. Please contact Quell Traders by phone or WhatsApp.",
+  emailUnavailable: "Email delivery is temporarily unavailable. Please contact Quell Traders by phone or WhatsApp.",
+  invalidSubmission: "Please send a valid form submission.",
+  fixFields: "Please check the form and correct the highlighted fields.",
+  deliveryFailed: "We couldn’t send your request. Please contact Quell Traders by phone or WhatsApp.",
+  badRequest: "Please send a valid form submission.",
+  validationError: "Please check the form and correct the highlighted fields.",
+};
