@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { getPublicSiteOrigin } from "@/app/site-origin";
 
 export async function GET(request: Request) {
