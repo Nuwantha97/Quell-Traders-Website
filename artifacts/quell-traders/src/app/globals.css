@@ -583,3 +583,437 @@ img { max-width: 100%; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Readable type scale. Kept after the responsive rules so compact defaults
+   cannot reduce visible text below the requested size at any viewport. */
+body {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+small,
+.eyebrow,
+.hero-kicker,
+.hero-location,
+.product-visual__label,
+.product-visual__note small,
+.product-visual__dpi small,
+.sustainability-heading .eyebrow,
+.brand-mark__words small,
+.printer-placeholder__brand small,
+.feature-card p,
+.hero-scroll,
+.founder-note small,
+.contact-person small,
+.statement-number,
+.division-card__number,
+.division-card__top > p,
+.brand-badges-label,
+.brand-footnote,
+.specs-aside span,
+.spec-index,
+.industry-extra span,
+.sustainability-footer,
+.contact-highlight small,
+.contact-detail small,
+.form-required-note {
+  font-size: 0.875rem;
+}
+
+.skip-link,
+.primary-nav > a:not(.button),
+.button--nav,
+.text-link,
+.feature-card p,
+.industry-extra,
+.footer-brand > p,
+.footer-links a,
+.footer-contact a,
+.footer-bottom p {
+  font-size: 0.9375rem;
+}
+
+.button {
+  font-size: 1rem;
+}
+
+.button--nav {
+  font-size: 0.9375rem;
+}
+
+.eyebrow {
+  letter-spacing: 0.1em;
+}
+
+.section-heading h2,
+.intro-copy .section-heading h2,
+.about-top .section-heading h2,
+.values-block > .section-heading h2,
+.clients-section .section-heading h2,
+.sustainability-heading h2 {
+  font-size: clamp(32px, 4.5vw, 52px);
+}
+
+.section-heading__description {
+  font-size: 1rem;
+}
+
+.brand-mark__words strong {
+  font-size: 1.25rem;
+}
+
+.brand-mark__words small {
+  line-height: 1.2;
+}
+
+.hero-copy h1 {
+  font-size: clamp(44px, 6.5vw, 76px);
+}
+
+.hero-kicker {
+  letter-spacing: 0.045em;
+}
+
+.hero-subtext {
+  max-width: 35rem;
+  font-size: 1.1875rem;
+}
+
+.hero-location {
+  line-height: 1.5;
+}
+
+.product-visual__label {
+  letter-spacing: 0.06em;
+}
+
+.product-visual__note b,
+.product-visual__dpi strong {
+  font-size: 1.25rem;
+}
+
+.feature-card h3 {
+  font-size: 0.9375rem;
+}
+
+.feature-card p {
+  line-height: 1.45;
+}
+
+.video-placeholder {
+  font-size: 0.875rem;
+}
+
+.text-link {
+  line-height: 1.5;
+}
+
+.about-summary > p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.founder-mark {
+  font-size: 0.875rem;
+}
+
+.founder-note b,
+.contact-person b {
+  font-size: 1rem;
+}
+
+.statement-number,
+.division-card__number,
+.division-card__top > p,
+.brand-badges-label,
+.brand-footnote {
+  letter-spacing: 0.06em;
+}
+
+.statement-card h3,
+.form-intro h3 {
+  font-size: 1.25rem;
+}
+
+.statement-card p,
+.division-card__intro,
+.division-benefit p,
+.edge-card p,
+.contact-detail p {
+  font-size: 1rem;
+}
+
+.values-block > .section-heading h2 {
+  font-size: clamp(32px, 4.5vw, 52px);
+}
+
+.value-card {
+  padding: 22px 19px;
+}
+
+.value-card h3,
+.division-benefit h4,
+.industry-card h3 {
+  font-size: 1.0625rem;
+}
+
+.value-card p,
+.division-benefit p,
+.division-card__intro,
+.industry-card p {
+  font-size: 0.9375rem;
+}
+
+.division-card {
+  padding: 30px 31px;
+}
+
+.division-card h3 {
+  font-size: 1.25rem;
+}
+
+.division-benefit h4 {
+  line-height: 1.45;
+}
+
+.brand-badges span {
+  padding: 8px 11px;
+  font-size: 0.875rem;
+}
+
+.checklist-item {
+  min-height: 74px;
+  padding: 15px 16px;
+}
+
+.checklist-item p,
+.specs-table th,
+.specs-table td {
+  font-size: 1rem;
+}
+
+.specs-table th,
+.specs-table td {
+  padding: 16px 17px;
+}
+
+.spec-index {
+  width: 2rem;
+}
+
+.industry-card {
+  min-height: 160px;
+  padding: 19px;
+}
+
+.industry-card p {
+  line-height: 1.6;
+}
+
+.industry-extra {
+  line-height: 1.6;
+}
+
+.sustainability-heading h2 {
+  line-height: 1.25;
+}
+
+.sustainability-items > div {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.sustainability-footer {
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+}
+
+.edge-card {
+  min-height: 220px;
+  padding: 25px 26px;
+}
+
+.edge-card__index {
+  font-size: 0.875rem;
+}
+
+.edge-card h3 {
+  font-size: 1.125rem;
+}
+
+.client-card {
+  min-height: 108px;
+  padding: 18px 12px;
+}
+
+.client-card > span {
+  font-size: 0.9375rem;
+}
+
+.contact-highlight > div > a:not(.whatsapp-link) {
+  font-size: 1.5rem;
+}
+
+.whatsapp-link,
+.contact-detail a {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.form-intro > p:last-child {
+  font-size: 0.9375rem;
+}
+
+.form-field > span {
+  font-size: 0.9375rem;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  min-height: 48px;
+  padding: 12px 13px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.field-error,
+.form-status {
+  font-size: 0.875rem;
+}
+
+.form-status {
+  line-height: 1.6;
+}
+
+.site-footer {
+  line-height: 1.6;
+}
+
+.footer-location,
+.footer-links h3,
+.footer-contact h3,
+.footer-contact p,
+.whatsapp-float > span {
+  font-size: 0.9375rem;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 820px) {
+  .primary-nav > a:not(.button) {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-kicker {
+    align-items: flex-start;
+    line-height: 1.45;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(44px, 6.5vw, 76px);
+  }
+
+  .hero-subtext {
+    font-size: 1.1875rem;
+  }
+
+  .product-visual__note {
+    max-width: calc(100% - 150px);
+    padding: 9px 10px;
+  }
+
+  .product-visual__note b {
+    font-size: 0.9375rem;
+  }
+
+  .product-visual__dpi {
+    max-width: calc(100% - 150px);
+  }
+
+  .feature-card {
+    min-height: 96px;
+    padding: 12px 10px;
+  }
+
+  .feature-card h3 {
+    font-size: 0.9375rem;
+  }
+
+  .feature-card p {
+    font-size: 0.875rem;
+  }
+
+  .statement-card {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .value-card {
+    min-height: 180px;
+    padding: 18px 15px;
+  }
+
+  .division-card {
+    padding: 24px 20px;
+  }
+
+  .specs-table th,
+  .specs-table td {
+    padding: 14px 10px;
+  }
+
+  .spec-index {
+    width: 1.75rem;
+  }
+
+  .industry-card {
+    min-height: 170px;
+    padding: 15px;
+  }
+
+  .sustainability-items {
+    gap: 12px 10px;
+  }
+
+  .edge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edge-card {
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .client-card {
+    min-height: 100px;
+    padding: 16px 10px;
+  }
+
+  .contact-information {
+    padding: 21px;
+  }
+
+  .contact-form {
+    padding: 22px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 1rem;
+  }
+
+  .footer-main {
+    gap: 30px 20px;
+  }
+}
