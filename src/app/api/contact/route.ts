@@ -3,8 +3,6 @@ import nodemailer from "nodemailer";
 import { formCopy } from "@/config/site";
 import { contactSchema } from "@/data/contact-schema";
 
-export const runtime = "nodejs";
-
 function escapeHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => {
     const entities: Record<string, string> = {

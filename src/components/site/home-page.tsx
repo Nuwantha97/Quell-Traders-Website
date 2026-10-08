@@ -2,7 +2,6 @@
 
 import {
   Activity,
-  ArrowDown,
   ArrowRight,
   ArrowUp,
   ArrowUpRight,
@@ -228,7 +227,7 @@ function Hero({ printerImageAvailable }: { printerImageAvailable: boolean }) {
       <div className="container feature-strip">
         {heroFeatures.map((feature) => <FeatureCard key={feature.title} {...feature} />)}
       </div>
-      <a className="hero-scroll" href="#intro-video" aria-label={pageCopy.scrollToExplore}><ArrowDown size={15} /></a>
+      <a className="hero-scroll" href="#intro-video" aria-label={pageCopy.scrollToExplore}></a>
     </section>
   );
 }
@@ -425,7 +424,7 @@ export function HomePage({
             <Reveal className="specs-intro">
               <p className="eyebrow">{pageCopy.specsEyebrow}</p>
               <SectionHeading title={pageCopy.specificationsTitle} />
-              <div className="specs-aside"><Printer size={22} /><span>{pageCopy.printerLabel}<br />{site.descriptor}</span><ArrowDown size={18} /></div>
+              <div className="specs-aside"><Printer size={22} /><span>{pageCopy.printerLabel}<br />{site.descriptor}</span></div>
             </Reveal>
             <Reveal><SpecsTable /></Reveal>
           </div>
