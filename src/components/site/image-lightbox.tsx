@@ -13,11 +13,15 @@ export interface LightboxImage {
 interface ImageGalleryLightboxProps {
   images: LightboxImage[];
   sizes?: string;
+  className?: string;
+  frameClassName?: string;
 }
 
 export function ImageGalleryLightbox({
   images,
   sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 380px",
+  className = "division-media-gallery",
+  frameClassName = "division-media-frame",
 }: ImageGalleryLightboxProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -153,7 +157,7 @@ export function ImageGalleryLightbox({
 
   return (
     <>
-      <div className="division-media-gallery">
+      <div className={className}>
         {images.map((img, idx) => (
           <button
             key={img.src}
@@ -161,7 +165,7 @@ export function ImageGalleryLightbox({
               triggerRefs.current[idx] = el;
             }}
             type="button"
-            className="division-media-frame division-media-frame--interactive"
+            className={`${frameClassName} division-media-frame--interactive`}
             aria-label={`View larger image: ${img.alt}`}
             onClick={() => setActiveIndex(idx)}
           >

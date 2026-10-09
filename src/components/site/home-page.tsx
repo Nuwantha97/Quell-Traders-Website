@@ -389,15 +389,17 @@ export function HomePage({
                       <h3>{division.title}</h3>
                       <p className="division-card__intro">{division.intro}</p>
                       {index === 0 && (
-                        <div className="division-media-single">
-                          <Image
-                            src="/images/tij-system.jpg"
-                            alt="Thermal inkjet (TIJ) printing system"
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                            className="division-media-image"
-                          />
-                        </div>
+                        <ImageGalleryLightbox
+                          images={[
+                            {
+                              src: "/images/tij-system.jpg",
+                              alt: "Thermal inkjet (TIJ) printing system",
+                            },
+                          ]}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                          className="division-media-single-wrap"
+                          frameClassName="division-media-single"
+                        />
                       )}
                       {division.brands && (
                         <div className="brand-badges-wrap">

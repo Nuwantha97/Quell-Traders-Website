@@ -306,16 +306,21 @@ img { max-width: 100%; }
 .brand-footnote { margin: 10px 0 0; color: #8391a0; font-size: 9px; line-height: 1.55; }
 
 /* Division media */
+.division-media-single-wrap {
+  width: 100%;
+  margin-top: 20px;
+}
 .division-media-single {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  margin-top: 20px;
+  margin-top: 0;
   overflow: hidden;
   border: 1px solid #dde6ec;
   border-radius: 16px;
   background: #f5f9fc;
   box-shadow: 0 4px 16px rgba(22, 53, 78, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .division-media-gallery {
   display: grid;
