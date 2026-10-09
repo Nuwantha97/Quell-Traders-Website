@@ -387,11 +387,74 @@ export function HomePage({
                       <div className="division-card__top"><span className="division-card__number">{division.number}</span><span className="division-card__icon"><Icon size={24} /></span><p>{division.eyebrow}</p></div>
                       <h3>{division.title}</h3>
                       <p className="division-card__intro">{division.intro}</p>
-                  {division.brands && (
+                      {index === 0 && (
+                        <div className="division-media-single">
+                          <Image
+                            src="/images/tij-system.jpg"
+                            alt="Thermal inkjet (TIJ) printing system"
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                            className="division-media-image"
+                          />
+                        </div>
+                      )}
+                      {division.brands && (
                         <div className="brand-badges-wrap">
                           <p className="brand-badges-label">{pageCopy.brandLabel}</p>
                           <div className="brand-badges">{division.brands.map((brand) => <span key={brand}>{brand}</span>)}</div>
                           <p className="brand-footnote">{division.footnote}</p>
+                        </div>
+                      )}
+                      {index === 1 && (
+                        <div className="division-media-gallery">
+                          <div className="division-media-item">
+                            <div className="division-media-frame">
+                              <Image
+                                src="/images/atlas-copco-air-filter.jpeg"
+                                alt="Atlas Copco air filter element"
+                                fill
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
+                                className="division-media-image"
+                              />
+                            </div>
+                            <span className="division-media-caption">Air Filter</span>
+                          </div>
+                          <div className="division-media-item">
+                            <div className="division-media-frame">
+                              <Image
+                                src="/images/atlas-copco-air-oil-separator.jpeg"
+                                alt="Atlas Copco air/oil separator cartridge"
+                                fill
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
+                                className="division-media-image"
+                              />
+                            </div>
+                            <span className="division-media-caption">Air/Oil Separator</span>
+                          </div>
+                          <div className="division-media-item">
+                            <div className="division-media-frame">
+                              <Image
+                                src="/images/compressor-repair-kits-spare-parts.jpeg"
+                                alt="Atlas Copco compressor repair kits and spare parts"
+                                fill
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
+                                className="division-media-image"
+                              />
+                            </div>
+                            <span className="division-media-caption">Repair Kits &amp; Spare Parts</span>
+                          </div>
+                          <div className="division-media-item">
+                            <div className="division-media-frame">
+                              <Image
+                                src="/images/canister-cartridge-filters.jpeg"
+                                alt="Canister and cartridge industrial filters"
+                                fill
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
+                                className="division-media-image"
+                              />
+                            </div>
+                            <span className="division-media-caption">Canister &amp; Cartridge Filters</span>
+                          </div>
                         </div>
                       )}
                       <div className="division-benefits">
