@@ -172,16 +172,18 @@ function ProductVisual({ imageAvailable }: { imageAvailable: boolean }) {
       <div className="product-visual__halo" aria-hidden="true" />
       <span className="product-visual__label"><span /> {pageCopy.printerLabel}</span>
       {imageAvailable && !imageFailed ? (
-        <Image
-          src={site.printerImage}
-          alt={pageCopy.printerAlt}
-          width={740}
-          height={540}
-          priority
-          sizes="(max-width: 900px) 90vw, 45vw"
-          className="product-visual__photo"
-          onError={() => setImageFailed(true)}
-        />
+        <div className="product-visual__photo-wrap">
+          <Image
+            src={site.printerImage}
+            alt={pageCopy.printerAlt}
+            width={600}
+            height={600}
+            priority
+            sizes="(max-width: 560px) 80vw, (max-width: 820px) 70vw, (max-width: 1060px) 45vw, 480px"
+            className="product-visual__photo"
+            onError={() => setImageFailed(true)}
+          />
+        </div>
       ) : (
         <div className="printer-placeholder" role="img" aria-label={pageCopy.printerPlaceholder}>
           <div className="printer-placeholder__body">

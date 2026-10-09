@@ -188,8 +188,27 @@ img { max-width: 100%; }
 .product-visual__halo::before, .product-visual__halo::after { position: absolute; inset: 23px; border: 1px dashed rgba(11,61,145,.13); border-radius: inherit; content: ""; }
 .product-visual__halo::after { inset: 54px; border-style: solid; border-color: rgba(11,61,145,.07); }
 .product-visual__label { position: absolute; z-index: 4; top: 24px; left: 25px; display: inline-flex; align-items: center; gap: 8px; color: #668195; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
-.product-visual__label > span { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-.product-visual__photo { position: relative; z-index: 3; width: 90%; height: auto; object-fit: contain; filter: drop-shadow(0 19px 15px rgba(18,43,62,.14)); }
+.product-visual__photo-wrap {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 48px 32px 58px;
+}
+.product-visual__photo {
+  position: relative;
+  z-index: 3;
+  width: auto;
+  max-width: 88%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 20px rgba(18,43,62,.15));
+  transition: transform 0.3s ease;
+}
 .printer-placeholder { position: relative; z-index: 3; width: 84%; height: 300px; }
 .printer-placeholder__body {
   position: absolute;
@@ -710,6 +729,8 @@ img { max-width: 100%; }
   .hero-actions .button { width: 100%; }
   .hero-location { margin-top: 19px; font-size: 10px; }
   .product-visual { min-height: 320px; border-radius: 20px; }
+  .product-visual__photo-wrap { padding: 40px 20px 48px; }
+  .product-visual__photo { max-height: 250px; max-width: 92%; }
   .product-visual__halo { width: 260px; height: 260px; }
   .printer-placeholder { transform: scale(.79); }
   .product-visual__label { top: 17px; left: 16px; font-size: 8px; }
