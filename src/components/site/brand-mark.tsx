@@ -20,8 +20,8 @@ export function BrandMark({
         <Image
           src={site.logoImage}
           alt=""
-          width={compact ? 38 : 44}
-          height={compact ? 38 : 44}
+          width={128}
+          height={128}
           className="brand-mark__image"
           onError={() => setImageFailed(true)}
           priority
