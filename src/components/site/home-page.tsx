@@ -52,6 +52,7 @@ import {
 import { BrandMark } from "./brand-mark";
 import { ContactForm } from "./contact-form";
 import { SectionHeading } from "./section-heading";
+import { ImageGalleryLightbox } from "./image-lightbox";
 
 const icons: Record<string, LucideIcon> = {
   activity: Activity,
@@ -406,56 +407,27 @@ export function HomePage({
                         </div>
                       )}
                       {index === 1 && (
-                        <div className="division-media-gallery">
-                          <div className="division-media-item">
-                            <div className="division-media-frame">
-                              <Image
-                                src="/images/atlas-copco-air-filter.jpeg"
-                                alt="Atlas Copco air filter element"
-                                fill
-                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
-                                className="division-media-image"
-                              />
-                            </div>
-                            <span className="division-media-caption">Air Filter</span>
-                          </div>
-                          <div className="division-media-item">
-                            <div className="division-media-frame">
-                              <Image
-                                src="/images/atlas-copco-air-oil-separator.jpeg"
-                                alt="Atlas Copco air/oil separator cartridge"
-                                fill
-                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
-                                className="division-media-image"
-                              />
-                            </div>
-                            <span className="division-media-caption">Air/Oil Separator</span>
-                          </div>
-                          <div className="division-media-item">
-                            <div className="division-media-frame">
-                              <Image
-                                src="/images/compressor-repair-kits-spare-parts.jpeg"
-                                alt="Atlas Copco compressor repair kits and spare parts"
-                                fill
-                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
-                                className="division-media-image"
-                              />
-                            </div>
-                            <span className="division-media-caption">Repair Kits &amp; Spare Parts</span>
-                          </div>
-                          <div className="division-media-item">
-                            <div className="division-media-frame">
-                              <Image
-                                src="/images/canister-cartridge-filters.jpeg"
-                                alt="Canister and cartridge industrial filters"
-                                fill
-                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
-                                className="division-media-image"
-                              />
-                            </div>
-                            <span className="division-media-caption">Canister &amp; Cartridge Filters</span>
-                          </div>
-                        </div>
+                        <ImageGalleryLightbox
+                          images={[
+                            {
+                              src: "/images/atlas-copco-air-filter.jpeg",
+                              alt: "Atlas Copco air filter element",
+                            },
+                            {
+                              src: "/images/atlas-copco-air-oil-separator.jpeg",
+                              alt: "Atlas Copco air/oil separator cartridge",
+                            },
+                            {
+                              src: "/images/compressor-repair-kits-spare-parts.jpeg",
+                              alt: "Atlas Copco compressor repair kits and spare parts",
+                            },
+                            {
+                              src: "/images/canister-cartridge-filters.jpeg",
+                              alt: "Canister and cartridge industrial filters",
+                            },
+                          ]}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 380px"
+                        />
                       )}
                       <div className="division-benefits">
                         {division.benefits.map((benefit) => <div className="division-benefit" key={benefit.title}><CheckCircle2 size={18} /><div><h4>{benefit.title}</h4><p>{benefit.description}</p></div></div>)}
