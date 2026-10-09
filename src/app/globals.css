@@ -315,9 +315,12 @@ img { max-width: 100%; }
 .checklist-item > span { display: grid; width: 26px; height: 26px; flex: 0 0 26px; place-items: center; border-radius: 50%; background: #e4f5de; color: var(--green-deep); }
 .checklist-item p { margin: 0; color: #3c5369; font-size: 11px; font-weight: 680; line-height: 1.5; }
 .specs-section { background: #f7fafc; }
-.specs-layout { display: grid; grid-template-columns: .7fr 1.3fr; align-items: start; gap: 60px; }
+.specs-layout { display: grid; grid-template-columns: .7fr 1.3fr; align-items: start; gap: 60px; overflow-wrap: break-word;}
+.specs-layout * {
+  min-width: 0;
+}
 .specs-intro .section-heading h2 { max-width: 350px; }
-.specs-aside { display: flex; align-items: center; gap: 13px; width: max-content; margin-top: 33px; padding: 14px 16px; border: 1px solid #dee8ed; border-radius: 13px; background: #fff; color: var(--blue); }
+.specs-aside { display: flex; align-items: center; gap: 13px; max-width: 100%; margin-top: 33px; padding: 14px 16px; border: 1px solid #dee8ed; border-radius: 13px; background: #fff; color: var(--blue); }
 .specs-aside span { color: #587087; font-size: 10px; font-weight: 750; line-height: 1.55; }
 .specs-aside > svg:last-child { margin-left: 12px; color: #9babba; }
 .specs-table-wrap { overflow: hidden; border: 1px solid #dfe7ed; border-radius: 16px; background: #fff; box-shadow: 0 10px 32px rgba(18,58,88,.055); }

@@ -26,8 +26,8 @@ export const site = {
   },
   heroSubtext: "Modern TIJ Technology for Cleaner, Safer & More Sustainable Production.",
   // Replace the local path with a YouTube URL to use an embed instead.
-  videoPoster: "/images/video-poster.jpg",
-  printerImage: "/images/tij-printer.jpg",
+  videoPoster: "video-poster.jpg",
+  printerImage: "tij-printer.jpg",
   logoImage: "/logo.png",
   mapQuery: "Wanawasala, Kelaniya, Sri Lanka",
   ogType: "website",
