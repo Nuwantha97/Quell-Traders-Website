@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
@@ -23,12 +24,17 @@ export function ImageGalleryLightbox({
   className = "division-media-gallery",
   frameClassName = "division-media-frame",
 }: ImageGalleryLightboxProps) {
+  const [mounted, setMounted] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
   const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isOpen = activeIndex !== null;
 
@@ -183,106 +189,110 @@ export function ImageGalleryLightbox({
         ))}
       </div>
 
-      <AnimatePresence>
-        {isOpen && activeIndex !== null && (
-          <motion.div
-            ref={modalRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Image viewer"
-            className="lightbox-overlay"
-            initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.2 }}
-            onClick={closeLightbox}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            {/* Close button */}
-            <button
-              type="button"
-              className="lightbox-close"
-              aria-label="Close image viewer"
-              onClick={(e) => {
-                e.stopPropagation();
-                closeLightbox();
-              }}
-            >
-              <X size={24} />
-            </button>
-
-            {/* Previous button */}
-            {images.length > 1 && (
-              <button
-                type="button"
-                className="lightbox-nav lightbox-nav--prev"
-                aria-label="Previous image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  showPrev();
-                }}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen && activeIndex !== null && (
+              <motion.div
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Image viewer"
+                className="lightbox-overlay"
+                initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.2 }}
+                onClick={closeLightbox}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
-                <ChevronLeft size={28} />
-              </button>
-            )}
+                {/* Close button */}
+                <button
+                  type="button"
+                  className="lightbox-close"
+                  aria-label="Close image viewer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeLightbox();
+                  }}
+                >
+                  <X size={24} />
+                </button>
 
-            {/* Next button */}
-            {images.length > 1 && (
-              <button
-                type="button"
-                className="lightbox-nav lightbox-nav--next"
-                aria-label="Next image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  showNext();
-                }}
-              >
-                <ChevronRight size={28} />
-              </button>
-            )}
+                {/* Previous button */}
+                {images.length > 1 && (
+                  <button
+                    type="button"
+                    className="lightbox-nav lightbox-nav--prev"
+                    aria-label="Previous image"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showPrev();
+                    }}
+                  >
+                    <ChevronLeft size={28} />
+                  </button>
+                )}
 
-            {/* Enlarged image container */}
-            <motion.div
-              key={activeIndex}
-              className="lightbox-content-frame"
-              initial={
-                reduceMotion
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: 0, scale: 0.94 }
-              }
-              animate={{ opacity: 1, scale: 1 }}
-              exit={
-                reduceMotion
-                  ? { opacity: 0, scale: 1 }
-                  : { opacity: 0, scale: 0.94 }
-              }
-              transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={images[activeIndex].src}
-                alt={images[activeIndex].alt}
-                fill
-                sizes="92vw"
-                className="lightbox-image"
-                priority
-              />
-            </motion.div>
+                {/* Next button */}
+                {images.length > 1 && (
+                  <button
+                    type="button"
+                    className="lightbox-nav lightbox-nav--next"
+                    aria-label="Next image"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showNext();
+                    }}
+                  >
+                    <ChevronRight size={28} />
+                  </button>
+                )}
 
-            {/* Counter */}
-            {images.length > 1 && (
-              <div
-                className="lightbox-counter"
-                aria-live="polite"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {activeIndex + 1} / {images.length}
-              </div>
+                {/* Enlarged image container */}
+                <motion.div
+                  key={activeIndex}
+                  className="lightbox-content-frame"
+                  initial={
+                    reduceMotion
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 0, scale: 0.94 }
+                  }
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={
+                    reduceMotion
+                      ? { opacity: 0, scale: 1 }
+                      : { opacity: 0, scale: 0.94 }
+                  }
+                  transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeOut" }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Image
+                    src={images[activeIndex].src}
+                    alt={images[activeIndex].alt}
+                    fill
+                    sizes="94vw"
+                    className="lightbox-image"
+                    priority
+                  />
+                </motion.div>
+
+                {/* Counter */}
+                {images.length > 1 && (
+                  <div
+                    className="lightbox-counter"
+                    aria-live="polite"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {activeIndex + 1} / {images.length}
+                  </div>
+                )}
+              </motion.div>
             )}
-          </motion.div>
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </>
   );
 }
