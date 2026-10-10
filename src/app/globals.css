@@ -214,7 +214,7 @@ img { max-width: 100%; }
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: 82px 0 60px;
+  padding: 42px 0 60px;
   background:
     radial-gradient(ellipse at 88% 28%, rgba(20, 163, 139, 0.4) 0%, transparent 48%),
     radial-gradient(ellipse at 12% 8%, rgba(31, 122, 224, 0.45) 0%, transparent 45%),
@@ -990,7 +990,7 @@ img { max-width: 100%; }
   .primary-nav--open { display: flex; }
   .primary-nav > a:not(.button) { padding: 13px 8px; border-bottom: 1px solid #edf2f6; color: #1e3a5f; font-size: 14px; font-weight: 700; }
   .primary-nav .button--nav { justify-content: center; margin-top: 14px; min-height: 44px; }
-  .hero-section { padding-top: 60px; }
+  .hero-section { padding-top: 40px; }
   .hero-layout { min-height: auto; grid-template-columns: 1fr; gap: 32px; }
   .hero-copy { padding-bottom: 0; }
   .hero-copy h1 { max-width: 600px; font-size: clamp(49px,9vw,76px); }
@@ -1038,7 +1038,7 @@ img { max-width: 100%; }
   .brand-mark--compact .brand-mark__image { width: 46px; height: 46px; }
   .brand-mark__words strong { font-size: 20px; }
   .section-heading h2 { font-size: 32px; }
-  .hero-section { padding-top: 45px; }
+  .hero-section { padding-top: 35px; }
   .hero-kicker { font-size: 9px; }
   .hero-copy h1 { font-size: clamp(43px,12vw,60px); }
   .hero-subtext { margin-top: 17px; font-size: 14px; }
