@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -24,17 +24,20 @@ export function ImageGalleryLightbox({
   className = "division-media-gallery",
   frameClassName = "division-media-frame",
 }: ImageGalleryLightboxProps) {
-  const [mounted, setMounted] = useState(false);
+  // false on the server and during hydration, true afterwards (needed for the body portal).
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [loadedThumbs, setLoadedThumbs] = useState<Record<string, boolean>>({});
+  const [loadedLarge, setLoadedLarge] = useState<Record<string, boolean>>({});
   const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const isOpen = activeIndex !== null;
 
@@ -171,7 +174,7 @@ export function ImageGalleryLightbox({
               triggerRefs.current[idx] = el;
             }}
             type="button"
-            className={`${frameClassName} division-media-frame--interactive`}
+            className={`${frameClassName} division-media-frame--interactive${loadedThumbs[img.src] ? "" : " is-loading"}`}
             aria-label={`View larger image: ${img.alt}`}
             onClick={() => setActiveIndex(idx)}
           >
@@ -181,6 +184,8 @@ export function ImageGalleryLightbox({
               fill
               sizes={sizes}
               className="division-media-image"
+              onLoad={() => setLoadedThumbs((prev) => ({ ...prev, [img.src]: true }))}
+              onError={() => setLoadedThumbs((prev) => ({ ...prev, [img.src]: true }))}
             />
             <span className="division-media-zoom-badge" aria-hidden="true">
               <ZoomIn size={15} />
@@ -253,7 +258,7 @@ export function ImageGalleryLightbox({
                 {/* Enlarged image container */}
                 <motion.div
                   key={activeIndex}
-                  className="lightbox-content-frame"
+                  className={`lightbox-content-frame${loadedLarge[images[activeIndex].src] ? "" : " is-loading is-loading--spinner"}`}
                   initial={
                     reduceMotion
                       ? { opacity: 1, scale: 1 }
@@ -275,6 +280,8 @@ export function ImageGalleryLightbox({
                     sizes="94vw"
                     className="lightbox-image"
                     priority
+                    onLoad={() => setLoadedLarge((prev) => ({ ...prev, [images[activeIndex].src]: true }))}
+                    onError={() => setLoadedLarge((prev) => ({ ...prev, [images[activeIndex].src]: true }))}
                   />
                 </motion.div>
 

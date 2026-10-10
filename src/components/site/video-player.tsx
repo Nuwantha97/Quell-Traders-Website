@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
-import Image from "next/image";
 import { site, VIDEO_SOURCE } from "@/config/site";
 import { pageCopy } from "@/data/site-content";
+import { LocalVideo } from "./local-video";
 
 function getYoutubeEmbedUrl(url: string) {
   try {
@@ -53,17 +53,5 @@ export function VideoPlayer() {
   }
 
   const posterPath = path.join(process.cwd(), "public", site.videoPoster.replace(/^\//, ""));
-  return (
-    <div className="video-frame">
-      <video
-        controls
-        preload="metadata"
-        poster={existsSync(posterPath) ? site.videoPoster : undefined}
-        aria-label={pageCopy.videoTitle}
-      >
-        <source src={VIDEO_SOURCE.url} type="video/mp4" />
-        {pageCopy.videoFallbackMessage}
-      </video>
-    </div>
-  );
+  return <LocalVideo poster={existsSync(posterPath) ? site.videoPoster : undefined} />;
 }

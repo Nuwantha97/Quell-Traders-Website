@@ -32,9 +32,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
-import { motion } from "framer-motion";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { site, navLinks, formCopy } from "@/config/site";
 import {
   about,
@@ -53,6 +51,7 @@ import { BrandMark } from "./brand-mark";
 import { ContactForm } from "./contact-form";
 import { SectionHeading } from "./section-heading";
 import { ImageGalleryLightbox } from "./image-lightbox";
+import { MapEmbed } from "./map-embed";
 
 const icons: Record<string, LucideIcon> = {
   activity: Activity,
@@ -104,17 +103,46 @@ function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Content is always rendered visible (server HTML included), so slow loads never show
+  // empty gaps. After hydration only blocks that are still below the fold are hidden, and
+  // they are revealed again as they scroll into view.
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+
+    element.style.setProperty("--reveal-delay", `${delay}s`);
+    element.classList.add("reveal-pending");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        element.classList.remove("reveal-pending");
+        element.classList.add("reveal-in");
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px 120px 0px", threshold: 0.01 },
+    );
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      element.classList.remove("reveal-pending");
+    };
+  }, [delay]);
+
   return (
-    <motion.div
-      className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.14 }}
-      transition={{ duration: reduceMotion ? 0 : 0.48, delay: reduceMotion ? 0 : delay, ease: [0.21, 0.7, 0.25, 1] }}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -136,6 +164,16 @@ function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  // The mobile menu must never stay open after the window grows to the desktop layout.
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 821px)");
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsOpen(false);
+    };
+    desktopQuery.addEventListener("change", closeOnDesktop);
+    return () => desktopQuery.removeEventListener("change", closeOnDesktop);
   }, []);
 
   return (
@@ -167,12 +205,13 @@ function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
 
 function ProductVisual({ imageAvailable }: { imageAvailable: boolean }) {
   const [imageFailed, setImageFailed] = useState(false);
+  const [photoLoaded, setPhotoLoaded] = useState(false);
   return (
     <div className="product-visual">
       <div className="product-visual__halo" aria-hidden="true" />
       <span className="product-visual__label"><span /> {pageCopy.printerLabel}</span>
       {imageAvailable && !imageFailed ? (
-        <div className="product-visual__photo-wrap">
+        <div className={`product-visual__photo-wrap${photoLoaded ? "" : " is-loading"}`}>
           <Image
             src={site.printerImage}
             alt={pageCopy.printerAlt}
@@ -181,6 +220,7 @@ function ProductVisual({ imageAvailable }: { imageAvailable: boolean }) {
             priority
             sizes="(max-width: 560px) 80vw, (max-width: 820px) 70vw, (max-width: 1060px) 45vw, 480px"
             className="product-visual__photo"
+            onLoad={() => setPhotoLoaded(true)}
             onError={() => setImageFailed(true)}
           />
         </div>
@@ -521,15 +561,7 @@ export function HomePage({
                 <div className="contact-detail"><span><Mail size={18} /></span><div><small>{pageCopy.emailLabel}</small>{site.emails.map((email) => <a key={email} href={`mailto:${email}`}>{email}</a>)}</div></div>
                 <div className="contact-detail"><span><MapPin size={18} /></span><div><small>{pageCopy.visitLabel}</small><p>{site.address}</p></div></div>
                 <div className="contact-person"><FounderMark /><span><b>{site.founder}</b><small>{site.role}</small></span></div>
-                <div className="map-frame">
-                  <iframe
-                    title={pageCopy.mapTitle}
-                    src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
-                </div>
+                <MapEmbed />
               </Reveal>
               <Reveal><ContactForm /></Reveal>
             </div>
