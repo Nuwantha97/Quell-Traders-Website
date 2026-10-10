@@ -198,7 +198,13 @@ function ProductVisual({ imageAvailable }: { imageAvailable: boolean }) {
           <div className="printer-placeholder__spark printer-placeholder__spark--two" />
         </div>
       )}
-      <div className="product-visual__note"><span className="product-visual__note-icon"><Check size={17} /></span><span><b>{divisions[0].benefits[2].title}</b><small>{pageCopy.precisionDescription}</small></span></div>
+      <div className="product-visual__note">
+        <span className="product-visual__note-icon"><Check size={17} /></span>
+        <span>
+          <b>High-Precision<br />Marking</b>
+          <small>{pageCopy.precisionDescription}</small>
+        </span>
+      </div>
       <div className="product-visual__dpi"><strong>{pageCopy.printerResolution}</strong><small>{pageCopy.dpiLabel}</small></div>
     </div>
   );
