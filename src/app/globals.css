@@ -22,7 +22,7 @@
   --wash-green: #f3f9f1;
   --radius: 20px;
   --shadow: 0 18px 54px rgba(11, 45, 87, 0.12);
-  --font-sans: "Inter", "Aptos", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", "Aptos", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
