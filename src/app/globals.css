@@ -722,9 +722,6 @@ img { max-width: 100%; }
 .specs-aside > svg:last-child { margin-left: 12px; color: #9babba; }
 .specs-table-wrap { overflow: hidden; border: 1px solid #d5e4ee; border-radius: 16px; background: #fff; box-shadow: 0 12px 36px rgba(18,58,88,.08); }
 .specs-table { width: 100%; border-collapse: collapse; }
-.specs-table tr:first-child { background: var(--navy); }
-.specs-table tr:first-child th { color: #ffffff; border-bottom: 2px solid var(--green); }
-.specs-table tr:first-child td { color: #f0f7ff; border-bottom: 2px solid var(--green); }
 .specs-table tr:nth-child(even) { background: #f2f7fc; }
 .specs-table tr + tr { border-top: 1px solid #e3edf4; }
 .specs-table th, .specs-table td { padding: 13px 16px; text-align: left; vertical-align: top; }
