@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_SITE_URL
     ? { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL) }
     : {}),
+  icons: {
+    icon: "/icon.png",
+  },
   openGraph: {
     title: site.title,
     description: site.description,
