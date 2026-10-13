@@ -11,12 +11,14 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const NEXT_PUBLIC_SITE_URL = "https://quell-traders-website.vercel.app/";
+
 export const metadata: Metadata = {
   title: site.title,
   description: site.description,
   applicationName: site.name,
-  ...(process.env.NEXT_PUBLIC_SITE_URL
-    ? { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL) }
+  ...(NEXT_PUBLIC_SITE_URL
+    ? { metadataBase: new URL(NEXT_PUBLIC_SITE_URL) }
     : {}),
   icons: {
     icon: "/icon.png",

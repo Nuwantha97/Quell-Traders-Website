@@ -1,12 +1,14 @@
 const allowedProtocol = (value: string | null | undefined) =>
   value === "https" || value === "http" ? value : null;
 
+const NEXT_PUBLIC_SITE_URL = "https://quell-traders-website.vercel.app/";
+
 function firstHeaderValue(value: string | null) {
   return value?.split(",")[0]?.trim() || null;
 }
 
 export function getPublicSiteOrigin(request: Request) {
-  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const configuredUrl = NEXT_PUBLIC_SITE_URL?.trim();
   if (configuredUrl) {
     try {
       const configured = new URL(configuredUrl);
