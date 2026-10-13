@@ -52,6 +52,7 @@ import { ContactForm } from "./contact-form";
 import { SectionHeading } from "./section-heading";
 import { ImageGalleryLightbox } from "./image-lightbox";
 import { MapEmbed } from "./map-embed";
+import { SpotlightGrid } from "./spotlight-grid";
 
 const icons: Record<string, LucideIcon> = {
   activity: Activity,
@@ -273,9 +274,9 @@ function Hero({ printerImageAvailable }: { printerImageAvailable: boolean }) {
           <div className="hero-art__orb hero-art__orb--blue" aria-hidden="true" />
         </Reveal>
       </div>
-      <div className="container feature-strip">
+      <SpotlightGrid className="container feature-strip">
         {heroFeatures.map((feature) => <FeatureCard key={feature.title} {...feature} />)}
-      </div>
+      </SpotlightGrid>
       <a className="hero-scroll" href="#intro-video" aria-label={pageCopy.scrollToExplore}></a>
     </section>
   );
@@ -300,32 +301,33 @@ export function SpecsTable() {
 
 export function IndustryGrid() {
   return (
-    <div className="industry-grid">
+    <SpotlightGrid className="industry-grid">
       {industries.map((industry, index) => {
         const Icon = icons[industry.icon] ?? CircleDot;
+        const isFeatured = index === 0 || index === 1; // Food & Beverage and Pharmaceutical
         return (
-          <Reveal key={industry.name} delay={index * 0.035}>
-            <article className="industry-card">
-              <span className="industry-card__icon" aria-hidden="true"><Icon size={23} strokeWidth={1.7} /></span>
+          <Reveal key={industry.name} delay={index * 0.035} className={isFeatured ? "industry-card-wrap--featured" : "industry-card-wrap"}>
+            <article className={`industry-card${isFeatured ? " industry-card--featured" : ""}`}>
+              <span className="industry-card__icon" aria-hidden="true"><Icon size={isFeatured ? 26 : 22} strokeWidth={1.7} /></span>
               <div><h3>{industry.name}</h3>{industry.description && <p>{industry.description}</p>}</div>
               <ArrowUpRight className="industry-card__arrow" size={16} aria-hidden="true" />
             </article>
           </Reveal>
         );
       })}
-    </div>
+    </SpotlightGrid>
   );
 }
 
 export function ClientList() {
   return (
-    <div className="client-grid">
+    <SpotlightGrid className="client-grid">
       {clients.map((client, index) => (
         <Reveal key={client} delay={index * 0.04}>
           <article className="client-card"><span>{client}</span></article>
         </Reveal>
       ))}
-    </div>
+    </SpotlightGrid>
   );
 }
 
@@ -414,12 +416,12 @@ export function HomePage({
             </div>
             <div className="values-block">
               <SectionHeading eyebrow={pageCopy.valuesEyebrow} title={pageCopy.valuesTitle} />
-              <div className="values-grid">
+              <SpotlightGrid className="values-grid">
                 {about.values.map((value, index) => {
                   const Icon = icons[value.icon] ?? CircleDot;
                   return <Reveal key={value.title} delay={index * 0.035}><article className="value-card"><span className="value-card__icon"><Icon size={20} /></span><h3>{value.title}</h3><p>{value.description}</p></article></Reveal>;
                 })}
-              </div>
+              </SpotlightGrid>
             </div>
           </div>
         </section>
@@ -498,9 +500,9 @@ export function HomePage({
               <SectionHeading title={pageCopy.printerBenefitsTitle} />
               <a href="#specifications" className="button button--primary">{pageCopy.viewSpecifications} <ArrowRight size={16} /></a>
             </Reveal>
-            <div className="printer-checklist">
+            <SpotlightGrid className="printer-checklist">
               {printerBenefits.map((benefit, index) => <Reveal key={benefit} delay={index * 0.03}><div className="checklist-item"><span><Check size={16} /></span><p>{benefit}</p></div></Reveal>)}
-            </div>
+            </SpotlightGrid>
           </div>
         </section>
 
@@ -526,7 +528,7 @@ export function HomePage({
         <section id="sustainability" className="sustainability-band" aria-labelledby="sustainability-title">
           <div className="container sustainability-inner">
             <div className="sustainability-heading"><span className="sustainability-icon"><Leaf size={23} /></span><div><h2 id="sustainability-title">{pageCopy.sustainabilityTitle}</h2></div></div>
-            <div className="sustainability-items">{sustainabilityItems.map((item) => <div key={item}><span><Check size={14} /></span>{item}</div>)}</div>
+            <SpotlightGrid className="sustainability-items">{sustainabilityItems.map((item) => <div key={item}><span><Check size={14} /></span>{item}</div>)}</SpotlightGrid>
             <p className="sustainability-footer">{sustainabilityFooter}</p>
           </div>
         </section>
@@ -534,12 +536,12 @@ export function HomePage({
         <section id="competitive-edge" className="section edge-section">
           <div className="container">
             <Reveal><SectionHeading eyebrow={pageCopy.competitiveEdgeTitle} title={pageCopy.competitiveEdgeTitle} /></Reveal>
-            <div className="edge-grid">
+            <SpotlightGrid className="edge-grid">
               {competitiveEdges.map((edge, index) => {
                 const Icon = icons[edge.icon] ?? CircleDot;
                 return <Reveal key={edge.title} delay={index * 0.06}><article className="edge-card"><span className="edge-card__icon"><Icon size={21} /></span><span className="edge-card__index">0{index + 1}</span><h3>{edge.title}</h3><p>{edge.description}</p></article></Reveal>;
               })}
-            </div>
+            </SpotlightGrid>
           </div>
         </section>
 
