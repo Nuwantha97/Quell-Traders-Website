@@ -1,14 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { site } from "@/config/site";
 import "./globals.css";
 
-// Self-hosted at build time: no render-blocking Google Fonts request and no text reflow
-// (next/font generates a size-adjusted fallback font automatically).
-const inter = Inter({
+// Self-hosted at build time with next/font/google
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-heading",
+  weight: ["500", "600", "700"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+  weight: ["500", "600"],
 });
 
 const NEXT_PUBLIC_SITE_URL = "https://quell-traders-website.vercel.app/";
@@ -67,7 +81,7 @@ const localBusiness = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body>
         <script
           type="application/ld+json"
