@@ -160,17 +160,31 @@ function FounderMark() {
 function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
+    if (!isOpen) return;
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        toggleRef.current?.focus();
+      }
     };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, []);
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) setIsOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOutside);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOutside);
+    };
+  }, [isOpen]);
 
   // The mobile menu must never stay open after the window grows to the desktop layout.
   useEffect(() => {
-    const desktopQuery = window.matchMedia("(min-width: 821px)");
+    const desktopQuery = window.matchMedia("(min-width: 961px)");
     const closeOnDesktop = (event: MediaQueryListEvent) => {
       if (event.matches) setIsOpen(false);
     };
@@ -179,10 +193,14 @@ function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
   }, []);
 
   return (
-    <header className="site-header">
+    <header ref={headerRef} className="site-header" onBlur={(event) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false);
+    }}>
       <div className="container header-inner">
         <BrandMark compact imageAvailable={imageAvailable} />
+        <WhatsAppLink inHeader />
         <button
+          ref={toggleRef}
           type="button"
           className="mobile-menu-toggle"
           aria-label={isOpen ? pageCopy.menuClose : pageCopy.menuOpen}
@@ -196,7 +214,7 @@ function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</a>
           ))}
-          <a className="button button--nav" href="#contact" onClick={() => setIsOpen(false)}>
+          <a className="button button--nav" href="#quote" onClick={() => setIsOpen(false)}>
             {formCopy.quoteButton} <ArrowUpRight size={15} aria-hidden="true" />
           </a>
         </nav>
@@ -248,13 +266,13 @@ function Hero({ printerImageAvailable }: { printerImageAvailable: boolean }) {
     <section className="hero-section" id="home">
       <div className="container hero-layout">
         <div className="hero-copy">
-          <p className="hero-kicker"><span aria-hidden="true" /> {site.descriptor}</p>
+          <p className="hero-kicker">{site.descriptor}</p>
           <h1>{site.taglines.primary.split(". ").map((line, index) => (
             <span key={line} className={index === 1 ? "text-green" : ""}>{line}{index === 0 ? "." : ""}</span>
           ))}</h1>
           <p className="hero-subtext">{site.heroSubtext}</p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#contact">{formCopy.requestQuote} <ArrowUpRight size={17} /></a>
+            <a className="button button--primary" href="#quote">{formCopy.requestQuote} <ArrowUpRight size={17} /></a>
             <a className="button button--outline" href="#intro-video"><Play size={16} fill="currentColor" aria-hidden="true" /> {formCopy.watchVideo}</a>
           </div>
           <div className="hero-location"><MapPin size={15} /><span>{site.location}</span><i aria-hidden="true" /><span>Est. {site.founded}</span></div>
@@ -342,16 +360,17 @@ function Footer({ imageAvailable }: { imageAvailable: boolean }) {
       <div className="container footer-bottom">
         <p>© {site.founded} {site.name}. {pageCopy.footerRights}</p>
         <p>{site.taglines.primary}</p>
+        <a className="footer-top-link" href="#home"><ArrowUp size={16} aria-hidden="true" />{pageCopy.backToTop}</a>
       </div>
     </footer>
   );
 }
 
-function WhatsAppFloatingButton() {
+function WhatsAppLink({ inHeader = false }: { inHeader?: boolean }) {
   return (
-    <a className="whatsapp-float" href={site.whatsappHref} target="_blank" rel="noreferrer" aria-label="Chat with Quell Traders on WhatsApp">
+    <a className={inHeader ? "header-chat" : "whatsapp-float"} href={site.whatsappHref} target="_blank" rel="noreferrer" aria-label="Chat with Quell Traders on WhatsApp">
       <MessageCircle size={23} fill="currentColor" strokeWidth={1.5} />
-      <span>{pageCopy.chatOnWhatsApp}</span>
+      {!inHeader && <span>{pageCopy.chatOnWhatsApp}</span>}
     </a>
   );
 }
@@ -559,7 +578,7 @@ export function HomePage({
         </section>
       </main>
       <Footer imageAvailable={logoAvailable} />
-      <WhatsAppFloatingButton />
+      <WhatsAppLink />
       {showBackToTop && <a className="back-to-top" href="#home" aria-label={pageCopy.backToTop}><ArrowUp size={19} /></a>}
     </>
   );

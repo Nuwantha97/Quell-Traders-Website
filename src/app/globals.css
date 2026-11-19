@@ -1920,16 +1920,10 @@ h1, h2 {
 @media (max-width: 820px) {
   .container { width: min(100% - 36px, 680px); }
   .section { padding: 78px 0; scroll-margin-top: 84px; }
-  .site-header { height: 76px; }
   .brand-mark { gap: 12px; }
   .brand-mark__image { width: 48px; height: 48px; }
   .brand-mark--compact .brand-mark__image { width: 48px; height: 48px; }
   .brand-mark__words strong { font-size: 20px; }
-  .mobile-menu-toggle { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid #d4e1ea; border-radius: 11px; background: #fff; color: var(--navy); }
-  .primary-nav { position: absolute; top: 72px; right: 0; left: 0; display: none; height: auto; flex-direction: column; align-items: stretch; gap: 0; padding: 12px 18px 20px; border-bottom: 3px solid var(--green); background: rgba(255,255,255,.98); box-shadow: 0 18px 30px rgba(11,45,87,.14); }
-  .primary-nav--open { display: flex; }
-  .primary-nav > a:not(.button) { padding: 13px 8px; border-bottom: 1px solid #edf2f6; color: #1e3a5f; font-size: 14px; font-weight: 700; }
-  .primary-nav .button--nav { justify-content: center; margin-top: 14px; min-height: 44px; }
   .intro-layout, .about-top, .printer-layout, .specs-layout, .contact-layout { grid-template-columns: minmax(0,1fr); gap: 34px; }
   .intro-layout { gap: 25px; }
   .intro-copy { max-width: 610px; }
@@ -1959,8 +1953,7 @@ h1, h2 {
 }
 @media (max-width: 560px) {
   .container { width: calc(100% - 32px); }
-  .section { padding: 66px 0; scroll-margin-top: 80px; }
-  .site-header { height: 76px; }
+  .section { padding: clamp(2.75rem, 9vw, 4rem) 0; }
   .brand-mark { gap: 10px; }
   .brand-mark__image { width: 46px; height: 46px; }
   .brand-mark--compact .brand-mark__image { width: 46px; height: 46px; }
@@ -2010,9 +2003,6 @@ h1, h2 {
   .footer-brand { grid-column: 1/-1; }
   .footer-contact { grid-column: 1/-1; }
   .footer-bottom { min-height: 61px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 3px; padding-block: 9px; }
-  .whatsapp-float { right: 15px; bottom: 15px; width: 51px; min-width: 51px; height: 51px; padding: 0; }
-  .whatsapp-float > span { display: none; }
-  .back-to-top { right: 19px; bottom: 77px; width: 39px; height: 39px; }
 }
 @media (max-width: 380px) {
   .brand-mark__words strong {
@@ -2362,8 +2352,12 @@ small,
   }
 
   .value-card {
-    min-height: 180px;
-    padding: 18px 15px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: .4rem .85rem;
+    min-height: 0;
+    padding: 1rem;
   }
 
   .division-card {
@@ -2375,13 +2369,14 @@ small,
     padding: 14px 10px;
   }
 
-  .spec-index {
-    width: 1.75rem;
-  }
+  .spec-index { display: none; }
 
   .industry-card {
-    min-height: 170px;
-    padding: 15px;
+    flex-direction: row;
+    align-items: center;
+    gap: .85rem;
+    min-height: 0;
+    padding: 1rem;
   }
 
   .sustainability-items {
@@ -2398,8 +2393,8 @@ small,
   }
 
   .client-card {
-    min-height: 100px;
-    padding: 16px 10px;
+    min-height: 4rem;
+    padding: .9rem 1rem;
   }
 
   .contact-information {
@@ -2497,16 +2492,6 @@ body { min-width: 320px; }
 .contact-highlight a,
 .footer-contact a { overflow-wrap: anywhere; }
 
-/* Desktop navigation must fit just above the mobile-menu breakpoint (821px - 960px). */
-@media (min-width: 821px) and (max-width: 960px) {
-  .primary-nav { gap: 10px; }
-  .primary-nav > a:not(.button) { font-size: 0.8125rem; }
-  .button--nav { padding-inline: 12px; }
-  .brand-mark__words strong { font-size: 20px; }
-  .brand-mark__image,
-  .brand-mark--compact .brand-mark__image { width: 46px; height: 46px; }
-}
-
 /* Long single words ("Pharmaceutical") must not push industry cards wider than the screen. */
 .industry-card h3,
 .value-card h3 { overflow-wrap: break-word; }
@@ -2603,22 +2588,51 @@ body { min-width: 320px; }
 .section { scroll-margin-top: 0; }
 :where(a, button, input, select, textarea):focus-visible { outline: 3px solid var(--blue-600); outline-offset: 3px; }
 
+.header-chat, .footer-top-link { display: none; }
+
 @media (max-width: 960px) {
+  :root { --mobile-header-height: 4rem; }
+  html { scroll-padding-top: calc(var(--mobile-header-height) + .75rem); }
+  .site-header { height: var(--mobile-header-height); }
+  .header-inner { gap: .5rem; }
+  .header-chat { display: grid; width: 44px; height: 44px; margin-inline-start: auto; place-items: center; border-radius: .7rem; background: var(--green-500); color: white; }
+  .whatsapp-float, .back-to-top { display: none; }
+  .footer-top-link { display: inline-flex; gap: .4rem; align-items: center; min-height: 44px; color: var(--citrus); }
+  .mobile-menu-toggle { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid #d4e1ea; border-radius: 11px; background: #fff; color: var(--navy); }
+  .primary-nav { position: absolute; top: 100%; max-height: calc(100dvh - var(--mobile-header-height)); overflow-y: auto; overscroll-behavior: contain; right: 0; left: 0; display: none; height: auto; flex-direction: column; align-items: stretch; gap: 0; padding: 12px 18px 20px; border-bottom: 3px solid var(--green); background: rgba(255,255,255,.98); box-shadow: 0 18px 30px rgba(11,45,87,.14); }
+  .primary-nav--open { display: flex; }
+  .primary-nav > a:not(.button) { padding: 13px 8px; border-bottom: 1px solid #edf2f6; color: #1e3a5f; font-size: 14px; font-weight: 700; }
+  .primary-nav .button--nav { justify-content: center; margin-top: 14px; min-height: 44px; }
   .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 820px) {
   .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
   .hero-copy h1 { font-size: clamp(2.6rem, 8.5vw, 4.2rem); }
-  .primary-nav { top: 100%; max-height: calc(100dvh - 76px); overflow-y: auto; overscroll-behavior: contain; }
   .division-grid { grid-template-columns: 1fr; }
   .values-grid, .edge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
-  .hero-section { padding-top: 2rem; }
+  .hero-section { padding-top: 1.75rem; }
+  .hero-layout { gap: 1.5rem; }
+  .hero-copy h1 { font-size: clamp(2.2rem, 9vw, 3.1rem); }
+  .hero-subtext { font-size: 1rem; margin-top: 1rem; }
+  .hero-actions { margin-top: 1.2rem; }
+  .value-card::after, .industry-card__arrow { display: none; }
+  .value-card__icon { grid-row: span 2; }
+  .value-card h3, .industry-card h3 { margin: 0; }
+  .value-card__icon, .industry-card__icon { width: 40px; height: 40px; flex-basis: 40px; }
+  .footer-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-column: 1 / -1; gap: 0 1rem; }
+  .footer-links h3 { grid-column: 1 / -1; }
+  .footer-links a { display: flex; align-items: center; min-height: 44px; }
   .hero-kicker { font-size: .75rem; }
   .hero-actions .button { flex: 1 1 11rem; padding-inline: .75rem; font-size: .9375rem; }
   .product-plate__caption { padding: .8rem; font-size: .9375rem; }
   .feature-card { flex-direction: column; gap: .5rem; }
   .values-grid, .edge-grid, .industry-grid { grid-template-columns: minmax(0, 1fr); }
   .industry-card-wrap--featured { grid-column: auto; }
+}
+
+@media (max-width: 960px) and (max-height: 500px) and (min-width: 520px) {
+  .primary-nav--open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }
+  .primary-nav .button--nav { margin-top: .25rem; }
 }
