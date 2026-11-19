@@ -22,6 +22,7 @@ import {
   MessageCircle,
   Package,
   Plane,
+  Play,
   Printer,
   Recycle,
   Settings,
@@ -206,22 +207,17 @@ function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
 
 function ProductVisual({ imageAvailable }: { imageAvailable: boolean }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const [photoLoaded, setPhotoLoaded] = useState(false);
   return (
-    <div className="product-visual">
-      <div className="product-visual__halo" aria-hidden="true" />
-      <span className="product-visual__label"><span /> {pageCopy.printerLabel}</span>
+    <figure className="product-plate">
       {imageAvailable && !imageFailed ? (
-        <div className={`product-visual__photo-wrap${photoLoaded ? "" : " is-loading"}`}>
+        <div className="product-plate__photo">
           <Image
             src={site.printerImage}
             alt={pageCopy.printerAlt}
-            width={600}
-            height={600}
-            priority
-            sizes="(max-width: 560px) 80vw, (max-width: 820px) 70vw, (max-width: 1060px) 45vw, 480px"
-            className="product-visual__photo"
-            onLoad={() => setPhotoLoaded(true)}
+            width={1200}
+            height={896}
+            preload
+            sizes="(max-width: 820px) min(100vw, 680px), (max-width: 1200px) 46vw, 550px"
             onError={() => setImageFailed(true)}
           />
         </div>
@@ -239,45 +235,37 @@ function ProductVisual({ imageAvailable }: { imageAvailable: boolean }) {
           <div className="printer-placeholder__spark printer-placeholder__spark--two" />
         </div>
       )}
-      <div className="product-visual__note">
-        <span className="product-visual__note-icon"><Check size={17} /></span>
-        <span>
-          <b>High-Precision<br />Marking</b>
-          <small>{pageCopy.precisionDescription}</small>
-        </span>
-      </div>
-      <div className="product-visual__dpi"><strong>{pageCopy.printerResolution}</strong><small>{pageCopy.dpiLabel}</small></div>
-    </div>
+      <figcaption className="product-plate__caption">
+        <span><Printer size={20} aria-hidden="true" />{pageCopy.printerLabel}</span>
+        <strong>{pageCopy.printerResolution} &times; {pageCopy.printerResolution} DPI</strong>
+      </figcaption>
+    </figure>
   );
 }
 
 function Hero({ printerImageAvailable }: { printerImageAvailable: boolean }) {
   return (
     <section className="hero-section" id="home">
-      <div className="hero-grid-pattern" aria-hidden="true" />
       <div className="container hero-layout">
         <div className="hero-copy">
-          <p className="hero-kicker"><span className="status-dot" /> {site.descriptor}</p>
+          <p className="hero-kicker"><span aria-hidden="true" /> {site.descriptor}</p>
           <h1>{site.taglines.primary.split(". ").map((line, index) => (
             <span key={line} className={index === 1 ? "text-green" : ""}>{line}{index === 0 ? "." : ""}</span>
           ))}</h1>
           <p className="hero-subtext">{site.heroSubtext}</p>
           <div className="hero-actions">
             <a className="button button--primary" href="#contact">{formCopy.requestQuote} <ArrowUpRight size={17} /></a>
-            <a className="button button--outline" href="#intro-video"><span className="play-mini">▶</span> {formCopy.watchVideo}</a>
+            <a className="button button--outline" href="#intro-video"><Play size={16} fill="currentColor" aria-hidden="true" /> {formCopy.watchVideo}</a>
           </div>
           <div className="hero-location"><MapPin size={15} /><span>{site.location}</span><i aria-hidden="true" /><span>Est. {site.founded}</span></div>
         </div>
         <Reveal className="hero-art">
           <ProductVisual imageAvailable={printerImageAvailable} />
-          <div className="hero-art__orb hero-art__orb--green" aria-hidden="true" />
-          <div className="hero-art__orb hero-art__orb--blue" aria-hidden="true" />
         </Reveal>
       </div>
-      <SpotlightGrid className="container feature-strip">
+      <div className="container feature-strip">
         {heroFeatures.map((feature) => <FeatureCard key={feature.title} {...feature} />)}
-      </SpotlightGrid>
-      <a className="hero-scroll" href="#intro-video" aria-label={pageCopy.scrollToExplore}></a>
+      </div>
     </section>
   );
 }
