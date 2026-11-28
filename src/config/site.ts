@@ -29,7 +29,8 @@ export const site = {
   videoPoster: "video-poster.jpg",
   printerImage: "/images/tij-printer.jpg",
   logoImage: "/logo.png",
-  mapQuery: "Wanawasala, Kelaniya, Sri Lanka",
+  googleMapsCid: "5708889621856299673",
+  mapHref: "https://maps.app.goo.gl/ihZuziM5YorKzGsH7",
   ogType: "website",
 } as const;
 

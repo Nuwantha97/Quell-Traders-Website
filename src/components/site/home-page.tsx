@@ -570,7 +570,7 @@ export function HomePage({
               <Reveal className="contact-information">
                 <div className="contact-highlight"><span className="contact-highlight__icon"><MessageCircle size={20} /></span><div><small>{pageCopy.speakWithTeamLabel}</small><a href={site.phoneHref}>{site.phone}</a><a className="whatsapp-link" href={site.whatsappHref} target="_blank" rel="noreferrer">{pageCopy.chatOnWhatsApp} <ArrowUpRight size={14} /></a></div></div>
                 <div className="contact-detail"><span><Mail size={18} /></span><div><small>{pageCopy.emailLabel}</small>{site.emails.map((email) => <a key={email} href={`mailto:${email}`}>{email}</a>)}</div></div>
-                <div className="contact-detail"><span><MapPin size={18} /></span><div><small>{pageCopy.visitLabel}</small><p>{site.address}</p></div></div>
+                <div className="contact-detail"><span><MapPin size={18} /></span><div><small>{pageCopy.visitLabel}</small><a href={site.mapHref} target="_blank" rel="noreferrer">{site.address}</a></div></div>
                 <div className="contact-person"><FounderMark /><span><b>{site.founder}</b><small>{site.role}</small></span></div>
                 <MapEmbed />
               </Reveal>

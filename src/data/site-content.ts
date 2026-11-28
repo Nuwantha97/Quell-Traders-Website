@@ -51,7 +51,7 @@ export const pageCopy = {
   visitLabel: "Visit us",
   speakWithTeamLabel: "Speak with our team",
   chatOnWhatsApp: "Chat on WhatsApp",
-  mapTitle: "Map showing Wanawasala, Kelaniya, Sri Lanka",
+  mapTitle: "Map showing the Quell Traders location in Kelaniya, Sri Lanka",
   comingSoon: "Intro video coming soon",
   scrollToExplore: "Scroll to explore",
   menuOpen: "Open navigation menu",

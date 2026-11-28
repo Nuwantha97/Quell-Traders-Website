@@ -11,7 +11,7 @@ export function MapEmbed() {
     <div className={`map-frame${loaded ? "" : " is-loading is-loading--spinner"}`}>
       <iframe
         title={pageCopy.mapTitle}
-        src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
+        src={`https://maps.google.com/maps?cid=${site.googleMapsCid}&output=embed`}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         allowFullScreen
