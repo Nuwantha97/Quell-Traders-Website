@@ -21,6 +21,7 @@ import {
   Menu,
   MessageCircle,
   Package,
+  Phone,
   Plane,
   Play,
   Printer,
@@ -198,7 +199,6 @@ function Navbar({ imageAvailable }: { imageAvailable: boolean }) {
     }}>
       <div className="container header-inner">
         <BrandMark compact imageAvailable={imageAvailable} />
-        <WhatsAppLink inHeader />
         <button
           ref={toggleRef}
           type="button"
@@ -366,11 +366,13 @@ function Footer({ imageAvailable }: { imageAvailable: boolean }) {
   );
 }
 
-function WhatsAppLink({ inHeader = false }: { inHeader?: boolean }) {
+function WhatsAppLink() {
   return (
-    <a className={inHeader ? "header-chat" : "whatsapp-float"} href={site.whatsappHref} target="_blank" rel="noreferrer" aria-label="Chat with Quell Traders on WhatsApp">
-      <MessageCircle size={23} fill="currentColor" strokeWidth={1.5} />
-      {!inHeader && <span>{pageCopy.chatOnWhatsApp}</span>}
+    <a className="whatsapp-float" href={site.whatsappHref} target="_blank" rel="noreferrer" aria-label="Chat with Quell Traders on WhatsApp">
+      <MessageCircle size={25} aria-hidden="true">
+        <Phone x={7} y={6} width={11} height={11} fill="currentColor" />
+      </MessageCircle>
+      <span>{pageCopy.chatOnWhatsApp}</span>
     </a>
   );
 }
